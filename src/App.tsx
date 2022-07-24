@@ -29,6 +29,9 @@ const App: Component = () => {
   return (
     <div>
       <ElButton
+        ref={(el) => {
+          console.log(el)
+        }}
         size={size()}
         type={type()}
         disabled={disabled()}

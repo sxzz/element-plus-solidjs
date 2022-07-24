@@ -1,4 +1,4 @@
-import { Component, ComponentProps, createMemo } from 'solid-js'
+import { Component, ComponentProps, createMemo, splitProps } from 'solid-js'
 import classnames from 'classnames'
 
 export const buttonSizes = ['', 'default', 'small', 'large'] as const
@@ -38,6 +38,20 @@ export type ButtonProps = {
 } & Omit<ComponentProps<'button'>, 'type'>
 
 export const ElButton: Component<ButtonProps> = (props) => {
+  const [, restProps] = splitProps(props, [
+    'size',
+    'type',
+    'disabled',
+    'plain',
+    'loading',
+    'round',
+    'circle',
+    'text',
+    'link',
+    'bg',
+    'autoInsertSpace',
+    'nativeType',
+  ])
   const classList = createMemo(() => {
     return classnames(
       [
@@ -66,7 +80,7 @@ export const ElButton: Component<ButtonProps> = (props) => {
 
   return (
     <button
-      {...props}
+      {...restProps}
       class={classList()}
       type={props.nativeType}
       aria-disabled={props.disabled || props.loading}
