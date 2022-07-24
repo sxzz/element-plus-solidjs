@@ -14,10 +14,17 @@ const App: Component = () => {
   const [text, setText] = createSignal(false)
   const [round, setRound] = createSignal(false)
   const [plain, setPlain] = createSignal(false)
+  const [insertSpace, setInsertSpace] = createSignal(false)
+  const [title, setTitle] = createSignal('按钮')
 
   const filterEmpty = <E extends any = any>(
     arr: Array<E> | Readonly<Array<E>>
   ): E[] => arr.filter((i) => !!i)
+
+  const handleClick = () => {
+    setTitle('点击了按钮')
+    setTimeout(() => setTitle('按钮'), 2000)
+  }
 
   return (
     <div>
@@ -29,8 +36,10 @@ const App: Component = () => {
         round={round()}
         plain={plain()}
         nativeType="button"
+        autoInsertSpace={insertSpace()}
+        onClick={handleClick}
       >
-        按钮
+        {title()}
       </ElButton>
       <div>
         Size:
@@ -97,6 +106,15 @@ const App: Component = () => {
             onChange={(e) => setPlain(e.currentTarget.checked)}
           />
           plain
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={insertSpace()}
+            onChange={(e) => setInsertSpace(e.currentTarget.checked)}
+          />
+          autoInsertSpace
         </label>
       </div>
       <hr />

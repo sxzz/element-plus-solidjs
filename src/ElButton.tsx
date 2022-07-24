@@ -33,6 +33,7 @@ export type ButtonProps = {
   text?: boolean
   link?: boolean
   bg?: boolean
+  autoInsertSpace?: boolean
   nativeType?: ComponentProps<'button'>['type']
 } & Omit<ComponentProps<'button'>, 'type'>
 
@@ -57,6 +58,12 @@ export const ElButton: Component<ButtonProps> = (props) => {
     )
   })
 
+  const shouldAddSpace = createMemo(() => {
+    if (!props.autoInsertSpace) return false
+    if (typeof props.children !== 'string') return false
+    return /^\p{Unified_Ideograph}{2}$/u.test(props.children.trim())
+  })
+
   return (
     <button
       {...props}
@@ -65,7 +72,9 @@ export const ElButton: Component<ButtonProps> = (props) => {
       aria-disabled={props.disabled || props.loading}
       disabled={props.disabled || props.loading}
     >
-      {props.children}
+      <span classList={{ 'el-button__text--expand': shouldAddSpace() }}>
+        {props.children}
+      </span>
     </button>
   )
 }
