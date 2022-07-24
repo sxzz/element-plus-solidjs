@@ -1,15 +1,10 @@
 import { Component, createSignal, Index } from 'solid-js'
-import { ConfigProvider } from './components'
-import {
-  ButtonSize,
-  buttonSizes,
-  ButtonType,
-  buttonTypes,
-  ElButton,
-} from './components/button'
+import { ConfigProvider, ElButtonGroup } from './components'
+import { ButtonType, buttonTypes, ElButton } from './components/button'
+import { ComponentSize, componentSizes } from './constants'
 
 const App: Component = () => {
-  const [size, setSize] = createSignal<ButtonSize>('default')
+  const [size, setSize] = createSignal<ComponentSize>('default')
   const [type, setType] = createSignal<ButtonType>('default')
   const [disabled, setDisabled] = createSignal(false)
   const [text, setText] = createSignal(false)
@@ -28,23 +23,34 @@ const App: Component = () => {
   return (
     <ConfigProvider button={{ autoInsertSpace: true }}>
       <ConfigProvider size="small">
-        <ElButton
-          ref={(el) => console.log(el)}
-          size={size()}
-          type={type()}
-          disabled={disabled()}
-          text={text()}
-          round={round()}
-          plain={plain()}
-          nativeType="button"
-          autoInsertSpace={insertSpace()}
-          onClick={handleClick}
-        >
-          {title()}
-        </ElButton>
+        <ElButtonGroup size={size()} type={type()}>
+          <ElButton
+            ref={(el) => console.log(el)}
+            disabled={disabled()}
+            text={text()}
+            round={round()}
+            plain={plain()}
+            nativeType="button"
+            autoInsertSpace={insertSpace()}
+            onClick={handleClick}
+          >
+            {title()}
+          </ElButton>
+          <ElButton
+            disabled={disabled()}
+            text={text()}
+            round={round()}
+            plain={plain()}
+            nativeType="button"
+            autoInsertSpace={insertSpace()}
+            onClick={handleClick}
+          >
+            {title()}
+          </ElButton>
+        </ElButtonGroup>
         <div>
           Size:
-          <Index each={buttonSizes}>
+          <Index each={componentSizes}>
             {(item) => (
               <label>
                 <input

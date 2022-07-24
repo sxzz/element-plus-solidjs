@@ -1,11 +1,16 @@
-import { Component, ComponentProps, createMemo, splitProps } from 'solid-js'
+import {
+  Component,
+  ComponentProps,
+  createMemo,
+  splitProps,
+  useContext,
+} from 'solid-js'
 import classnames from 'classnames'
 import { useNamespace } from '../utils/namespace'
 import { useSize } from '../composables/use-size'
 import { useGlobalConfig } from '../composables/use-global-config'
-
-export const buttonSizes = ['', 'default', 'small', 'large'] as const
-export type ButtonSize = typeof buttonSizes[number]
+import { ComponentSize } from '../constants'
+import { ButtonGroupContext } from './button-group'
 
 export const buttonTypes = [
   'default',
@@ -26,7 +31,7 @@ export type ButtonType = typeof buttonTypes[number]
 export const buttonNativeTypes = ['button', 'submit', 'reset'] as const
 
 export type ButtonProps = {
-  size?: ButtonSize
+  size?: ComponentSize
   type?: ButtonType
   disabled?: boolean
   plain?: boolean
@@ -38,9 +43,11 @@ export type ButtonProps = {
   bg?: boolean
   autoInsertSpace?: boolean
   nativeType?: ComponentProps<'button'>['type']
-} & Omit<ComponentProps<'button'>, 'type'>
+}
 
-export const ElButton: Component<ButtonProps> = (props) => {
+export const ElButton: Component<
+  ButtonProps & Omit<ComponentProps<'button'>, 'type'>
+> = (props) => {
   const [, restProps] = splitProps(props, [
     'size',
     'type',
@@ -57,8 +64,10 @@ export const ElButton: Component<ButtonProps> = (props) => {
   ])
   const ns = useNamespace('button')
   const globalConfig = useGlobalConfig()
+  const buttonGroupContext = useContext(ButtonGroupContext)
 
-  const size = useSize(createMemo(() => props.size))
+  const size = useSize(createMemo(() => props.size || buttonGroupContext?.size))
+  const type = createMemo(() => props.type || buttonGroupContext?.type || '')
   const autoInsertSpace = createMemo(
     () =>
       props.autoInsertSpace ?? globalConfig?.().button?.autoInsertSpace ?? false
@@ -67,7 +76,7 @@ export const ElButton: Component<ButtonProps> = (props) => {
   const classList = createMemo(() => {
     return classnames([
       ns.b(),
-      ns.m(props.type),
+      ns.m(type()),
       ns.m(size()),
       ns.is('disabled', props.disabled),
       ns.is('loading', props.loading),
