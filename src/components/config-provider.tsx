@@ -1,12 +1,7 @@
-import {
-  Accessor,
-  createContext,
-  createMemo,
-  ParentComponent,
-  splitProps,
-} from 'solid-js'
+import { createContext, createMemo, splitProps } from 'solid-js'
 import { useGlobalConfig } from '../composables'
-import { ComponentSize } from '../constants'
+import type { Accessor, ParentComponent } from 'solid-js'
+import type { ComponentSize } from '../constants'
 
 export interface ConfigProviderProps {
   size?: ComponentSize

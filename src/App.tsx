@@ -1,7 +1,10 @@
-import { Component, createSignal, Index } from 'solid-js'
+import { Index, createSignal } from 'solid-js'
 import { ConfigProvider, ElButtonGroup } from './components'
-import { ButtonType, buttonTypes, ElButton } from './components/button'
-import { ComponentSize, componentSizes } from './constants'
+import { ElButton, buttonTypes } from './components/button'
+import { componentSizes } from './constants'
+import type { ButtonType } from './components/button'
+import type { ComponentSize } from './constants'
+import type { Component } from 'solid-js'
 
 const App: Component = () => {
   const [namespace, setNamespace] = createSignal('el')

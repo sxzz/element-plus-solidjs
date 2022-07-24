@@ -1,7 +1,8 @@
-import { Component, ComponentProps, createContext, splitProps } from 'solid-js'
+import { createContext, splitProps } from 'solid-js'
 import { useNamespace } from '../composables'
-import { ComponentSize } from '../constants'
-import { ButtonType } from './button'
+import type { Component, ComponentProps } from 'solid-js'
+import type { ComponentSize } from '../constants'
+import type { ButtonType } from './button'
 
 export type ButtonGroupProps = {
   size?: ComponentSize

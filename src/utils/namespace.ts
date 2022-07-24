@@ -1,4 +1,4 @@
-import { Accessor } from 'solid-js'
+import type { Accessor } from 'solid-js'
 
 const statePrefix = 'is-'
 
@@ -46,7 +46,7 @@ export const createNamespace = (namespace: Accessor<string>, block: string) => {
     (name: string, state: boolean | undefined): string
     (name: string): string
   } = (name: string, ...args: [boolean | undefined] | []) => {
-    const state = args.length >= 1 ? args[0]! : true
+    const state = args.length > 0 ? args[0]! : true
     return name && state ? `${statePrefix}${name}` : ''
   }
 
@@ -54,22 +54,22 @@ export const createNamespace = (namespace: Accessor<string>, block: string) => {
   // --el-xxx: value;
   const cssVar = (object: Record<string, string>) => {
     const styles: Record<string, string> = {}
-    for (const key in object) {
-      styles[`--${namespace}-${key}`] = object[key]
+    for (const key of Object.keys(object)) {
+      styles[`--${namespace()}-${key}`] = object[key]
     }
     return styles
   }
   // with block
   const cssVarBlock = (object: Record<string, string>) => {
     const styles: Record<string, string> = {}
-    for (const key in object) {
-      styles[`--${namespace}-${block}-${key}`] = object[key]
+    for (const key of Object.keys(object)) {
+      styles[`--${namespace()}-${block}-${key}`] = object[key]
     }
     return styles
   }
 
-  const cssVarName = (name: string) => `--${namespace}-${name}`
-  const cssVarBlockName = (name: string) => `--${namespace}-${block}-${name}`
+  const cssVarName = (name: string) => `--${namespace()}-${name}`
+  const cssVarBlockName = (name: string) => `--${namespace()}-${block}-${name}`
 
   return {
     namespace,

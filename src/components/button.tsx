@@ -1,16 +1,9 @@
-import {
-  Component,
-  ComponentProps,
-  createMemo,
-  splitProps,
-  useContext,
-} from 'solid-js'
+import { createMemo, splitProps, useContext } from 'solid-js'
 import classnames from 'classnames'
-import { useNamespace } from '../composables'
-import { useSize } from '../composables'
-import { useGlobalConfig } from '../composables'
-import { ComponentSize } from '../constants'
+import { useGlobalConfig, useNamespace, useSize } from '../composables'
 import { ButtonGroupContext } from './button-group'
+import type { ComponentSize } from '../constants'
+import type { Component, ComponentProps } from 'solid-js'
 
 export const buttonTypes = [
   'default',
@@ -66,6 +59,7 @@ export const ElButton: Component<
   const globalConfig = useGlobalConfig()
   const buttonGroupContext = useContext(ButtonGroupContext)
 
+  // eslint-disable-next-line unicorn/explicit-length-check
   const size = useSize(createMemo(() => props.size || buttonGroupContext?.size))
   const type = createMemo(() => props.type || buttonGroupContext?.type || '')
   const autoInsertSpace = createMemo(
