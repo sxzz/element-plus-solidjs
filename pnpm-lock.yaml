@@ -1,12 +1,16 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@element-plus/theme-chalk': ^2.2.6
+  classnames: ^2.3.1
   solid-js: ^1.4.8
   typescript: ^4.7.4
   vite: ^3.0.2
   vite-plugin-solid: ^2.3.0
 
 dependencies:
+  '@element-plus/theme-chalk': 2.2.6
+  classnames: 2.3.1
   solid-js: 1.4.8
 
 devDependencies:
@@ -323,6 +327,10 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
+  /@element-plus/theme-chalk/2.2.6:
+    resolution: {integrity: sha512-cnzKVB8EpCGzMTnfxm1xEdXwj3Op6sbHUBG7Pxr/cyPCVtvw4xs8Z4aLo1LL9QH7T5dykYMICbB82a1nVNTrOw==}
+    dev: false
+
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
     engines: {node: '>=6.0.0'}
@@ -412,6 +420,10 @@ packages:
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
     dev: true
+
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}

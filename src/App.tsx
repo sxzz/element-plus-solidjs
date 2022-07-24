@@ -1,27 +1,57 @@
-import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
-import styles from './App.module.css';
+import { Component, createSignal, For, Index } from 'solid-js'
+import {
+  ButtonSize,
+  buttonSizes,
+  ButtonType,
+  buttonTypes,
+  ElButton,
+} from './ElButton'
 
 const App: Component = () => {
-  return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
-  );
-};
+  const [size, setSize] = createSignal<ButtonSize>('')
+  const [type, setType] = createSignal<ButtonType>('')
 
-export default App;
+  return (
+    <div>
+      <div>
+        <ElButton size={size()} type={type()}>
+          按钮
+        </ElButton>
+      </div>
+      <div>
+        Size:
+        <Index each={buttonSizes}>
+          {(item) => (
+            <label>
+              <input
+                type="radio"
+                checked={size() === item()}
+                onChange={() => setSize(item())}
+              />
+              {item()}
+            </label>
+          )}
+        </Index>
+      </div>
+      <div>
+        Type:
+        <Index each={buttonTypes}>
+          {(item) => (
+            <label>
+              <input
+                type="radio"
+                checked={type() === item()}
+                onChange={() => setType(item())}
+              />
+              {item()}
+            </label>
+          )}
+        </Index>
+      </div>
+      <hr />
+      Powered by solid-js.
+    </div>
+  )
+}
+
+export default App
