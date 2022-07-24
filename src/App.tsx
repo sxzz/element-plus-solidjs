@@ -1,11 +1,12 @@
-import { Component, createSignal, For, Index } from 'solid-js'
+import { Component, createSignal, Index } from 'solid-js'
+import { ConfigProvider } from './components'
 import {
   ButtonSize,
   buttonSizes,
   ButtonType,
   buttonTypes,
   ElButton,
-} from './ElButton'
+} from './components/button'
 
 const App: Component = () => {
   const [size, setSize] = createSignal<ButtonSize>('default')
@@ -17,17 +18,13 @@ const App: Component = () => {
   const [insertSpace, setInsertSpace] = createSignal(false)
   const [title, setTitle] = createSignal('按钮')
 
-  const filterEmpty = <E extends any = any>(
-    arr: Array<E> | Readonly<Array<E>>
-  ): E[] => arr.filter((i) => !!i)
-
   const handleClick = () => {
     setTitle('点击了按钮')
     setTimeout(() => setTitle('按钮'), 2000)
   }
 
   return (
-    <div>
+    <ConfigProvider size="small">
       <ElButton
         ref={(el) => {
           console.log(el)
@@ -46,7 +43,7 @@ const App: Component = () => {
       </ElButton>
       <div>
         Size:
-        <Index each={filterEmpty(buttonSizes)}>
+        <Index each={buttonSizes}>
           {(item) => (
             <label>
               <input
@@ -61,7 +58,7 @@ const App: Component = () => {
       </div>
       <div>
         Type:
-        <Index each={filterEmpty(buttonTypes)}>
+        <Index each={buttonTypes}>
           {(item) => (
             <label>
               <input
@@ -122,7 +119,7 @@ const App: Component = () => {
       </div>
       <hr />
       Powered by <a href="https://www.solidjs.com/">SolidJS</a>.
-    </div>
+    </ConfigProvider>
   )
 }
 

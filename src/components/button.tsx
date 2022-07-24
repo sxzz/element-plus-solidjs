@@ -1,6 +1,7 @@
 import { Component, ComponentProps, createMemo, splitProps } from 'solid-js'
 import classnames from 'classnames'
-import { useNamespace } from './utils/namespace'
+import { useNamespace } from '../utils/namespace'
+import { useSize } from '../composables/use-size'
 
 export const buttonSizes = ['', 'default', 'small', 'large'] as const
 export type ButtonSize = typeof buttonSizes[number]
@@ -55,11 +56,12 @@ export const ElButton: Component<ButtonProps> = (props) => {
   ])
   const ns = useNamespace('button')
 
+  const size = useSize(createMemo(() => props.size))
   const classList = createMemo(() => {
     return classnames([
       ns.b(),
       ns.m(props.type),
-      ns.m(props.size),
+      ns.m(size()),
       ns.is('disabled', props.disabled),
       ns.is('loading', props.loading),
       ns.is('plain', props.plain),
