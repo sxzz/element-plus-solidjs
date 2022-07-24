@@ -25,27 +25,35 @@ export const buttonNativeTypes = ['button', 'submit', 'reset'] as const
 export type ButtonProps = {
   size?: ButtonSize
   type?: ButtonType
-  // plain?:boolean
+  disabled?: boolean
+  plain?: boolean
+  loading?: boolean
+  round?: boolean
+  circle?: boolean
+  text?: boolean
+  link?: boolean
+  bg?: boolean
 } & Omit<ComponentProps<'button'>, 'type'>
 
 export const ElButton: Component<ButtonProps> = (props) => {
   const classList = createMemo(() => {
-    return classnames([
-      'el-button',
-      props.type ? `el-button--${props.type}` : '',
-      props.size ? `el-button--${props.size}` : '',
-    ])
-    // ns.b(),
-    // ns.m(_type),
-    // ns.m(_size),
-    // ns.is('disabled', _disabled),
-    // ns.is('loading', loading),
-    // ns.is('plain', plain),
-    // ns.is('round', round),
-    // ns.is('circle', circle),
-    // ns.is('text', text),
-    // ns.is('link', link),
-    //   ns.is('has-bg', bg),
+    return classnames(
+      [
+        'el-button',
+        props.type ? `el-button--${props.type}` : '',
+        props.size ? `el-button--${props.size}` : '',
+      ],
+      {
+        'is-disabled': props.disabled,
+        'is-loading': props.loading,
+        'is-plain': props.plain,
+        'is-round': props.round,
+        'is-circle': props.circle,
+        'is-text': props.text,
+        'is-link': props.link,
+        'is-has-bg': props.bg,
+      }
+    )
   })
 
   return <button class={classList()}>{props.children}</button>
