@@ -4,5 +4,5 @@ import { useGlobalConfig } from './use-global-config'
 
 export const useSize = (size?: Accessor<ComponentSize | undefined>) => {
   const globalConfig = useGlobalConfig()
-  return createMemo(() => size?.() || globalConfig.size)
+  return createMemo(() => size?.() || globalConfig?.().size)
 }
