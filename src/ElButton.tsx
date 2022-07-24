@@ -1,5 +1,6 @@
 import { Component, ComponentProps, createMemo, splitProps } from 'solid-js'
 import classnames from 'classnames'
+import { useNamespace } from './utils/namespace'
 
 export const buttonSizes = ['', 'default', 'small', 'large'] as const
 export type ButtonSize = typeof buttonSizes[number]
@@ -52,24 +53,22 @@ export const ElButton: Component<ButtonProps> = (props) => {
     'autoInsertSpace',
     'nativeType',
   ])
+  const ns = useNamespace('button')
+
   const classList = createMemo(() => {
-    return classnames(
-      [
-        'el-button',
-        props.type ? `el-button--${props.type}` : '',
-        props.size ? `el-button--${props.size}` : '',
-      ],
-      {
-        'is-disabled': props.disabled,
-        'is-loading': props.loading,
-        'is-plain': props.plain,
-        'is-round': props.round,
-        'is-circle': props.circle,
-        'is-text': props.text,
-        'is-link': props.link,
-        'is-has-bg': props.bg,
-      }
-    )
+    return classnames([
+      ns.b(),
+      ns.m(props.type),
+      ns.m(props.size),
+      ns.is('disabled', props.disabled),
+      ns.is('loading', props.loading),
+      ns.is('plain', props.plain),
+      ns.is('round', props.round),
+      ns.is('circle', props.circle),
+      ns.is('text', props.text),
+      ns.is('link', props.link),
+      ns.is('has-bg', props.bg),
+    ])
   })
 
   const shouldAddSpace = createMemo(() => {
@@ -86,7 +85,7 @@ export const ElButton: Component<ButtonProps> = (props) => {
       aria-disabled={props.disabled || props.loading}
       disabled={props.disabled || props.loading}
     >
-      <span classList={{ 'el-button__text--expand': shouldAddSpace() }}>
+      <span classList={{ [ns.em('text', 'expand')]: shouldAddSpace() }}>
         {props.children}
       </span>
     </button>
