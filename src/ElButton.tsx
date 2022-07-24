@@ -58,7 +58,13 @@ export const ElButton: Component<ButtonProps> = (props) => {
   })
 
   return (
-    <button class={classList()} type={props.nativeType}>
+    <button
+      {...props}
+      class={classList()}
+      type={props.nativeType}
+      aria-disabled={props.disabled || props.loading}
+      disabled={props.disabled || props.loading}
+    >
       {props.children}
     </button>
   )
