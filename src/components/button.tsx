@@ -2,6 +2,7 @@ import { Component, ComponentProps, createMemo, splitProps } from 'solid-js'
 import classnames from 'classnames'
 import { useNamespace } from '../utils/namespace'
 import { useSize } from '../composables/use-size'
+import { useGlobalConfig } from '../composables/use-global-config'
 
 export const buttonSizes = ['', 'default', 'small', 'large'] as const
 export type ButtonSize = typeof buttonSizes[number]
@@ -55,8 +56,14 @@ export const ElButton: Component<ButtonProps> = (props) => {
     'nativeType',
   ])
   const ns = useNamespace('button')
+  const globalConfig = useGlobalConfig()
 
   const size = useSize(createMemo(() => props.size))
+  const autoInsertSpace = createMemo(
+    () =>
+      props.autoInsertSpace ?? globalConfig?.().button?.autoInsertSpace ?? false
+  )
+
   const classList = createMemo(() => {
     return classnames([
       ns.b(),
@@ -74,7 +81,7 @@ export const ElButton: Component<ButtonProps> = (props) => {
   })
 
   const shouldAddSpace = createMemo(() => {
-    if (!props.autoInsertSpace) return false
+    if (!autoInsertSpace()) return false
     if (typeof props.children !== 'string') return false
     return /^\p{Unified_Ideograph}{2}$/u.test(props.children.trim())
   })
