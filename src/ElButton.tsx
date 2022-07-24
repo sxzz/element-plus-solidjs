@@ -33,6 +33,7 @@ export type ButtonProps = {
   text?: boolean
   link?: boolean
   bg?: boolean
+  nativeType?: ComponentProps<'button'>['type']
 } & Omit<ComponentProps<'button'>, 'type'>
 
 export const ElButton: Component<ButtonProps> = (props) => {
@@ -56,5 +57,9 @@ export const ElButton: Component<ButtonProps> = (props) => {
     )
   })
 
-  return <button class={classList()}>{props.children}</button>
+  return (
+    <button class={classList()} type={props.nativeType}>
+      {props.children}
+    </button>
+  )
 }

@@ -8,30 +8,33 @@ import {
 } from './ElButton'
 
 const App: Component = () => {
-  const [size, setSize] = createSignal<ButtonSize>('')
-  const [type, setType] = createSignal<ButtonType>('')
+  const [size, setSize] = createSignal<ButtonSize>('default')
+  const [type, setType] = createSignal<ButtonType>('default')
   const [disabled, setDisabled] = createSignal(false)
   const [text, setText] = createSignal(false)
   const [round, setRound] = createSignal(false)
   const [plain, setPlain] = createSignal(false)
 
+  const filterEmpty = <E extends any = any>(
+    arr: Array<E> | Readonly<Array<E>>
+  ): E[] => arr.filter((i) => !!i)
+
   return (
     <div>
-      <div>
-        <ElButton
-          size={size()}
-          type={type()}
-          disabled={disabled()}
-          text={text()}
-          round={round()}
-          plain={plain()}
-        >
-          按钮
-        </ElButton>
-      </div>
+      <ElButton
+        size={size()}
+        type={type()}
+        disabled={disabled()}
+        text={text()}
+        round={round()}
+        plain={plain()}
+        nativeType="button"
+      >
+        按钮
+      </ElButton>
       <div>
         Size:
-        <Index each={[...buttonSizes].sort()}>
+        <Index each={filterEmpty(buttonSizes)}>
           {(item) => (
             <label>
               <input
@@ -46,7 +49,7 @@ const App: Component = () => {
       </div>
       <div>
         Type:
-        <Index each={[...buttonTypes].sort()}>
+        <Index each={filterEmpty(buttonTypes)}>
           {(item) => (
             <label>
               <input
@@ -97,7 +100,7 @@ const App: Component = () => {
         </label>
       </div>
       <hr />
-      Powered by solid-js.
+      Powered by <a href="https://www.solidjs.com/">SolidJS</a>.
     </div>
   )
 }
