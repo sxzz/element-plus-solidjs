@@ -6,9 +6,9 @@ import {
   useContext,
 } from 'solid-js'
 import classnames from 'classnames'
-import { useNamespace } from '../utils/namespace'
-import { useSize } from '../composables/use-size'
-import { useGlobalConfig } from '../composables/use-global-config'
+import { useNamespace } from '../composables'
+import { useSize } from '../composables'
+import { useGlobalConfig } from '../composables'
 import { ComponentSize } from '../constants'
 import { ButtonGroupContext } from './button-group'
 

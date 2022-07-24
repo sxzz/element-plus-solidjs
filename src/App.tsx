@@ -4,6 +4,8 @@ import { ButtonType, buttonTypes, ElButton } from './components/button'
 import { ComponentSize, componentSizes } from './constants'
 
 const App: Component = () => {
+  const [namespace, setNamespace] = createSignal('el')
+
   const [size, setSize] = createSignal<ComponentSize>('default')
   const [type, setType] = createSignal<ButtonType>('default')
   const [disabled, setDisabled] = createSignal(false)
@@ -21,7 +23,14 @@ const App: Component = () => {
   }
 
   return (
-    <ConfigProvider button={{ autoInsertSpace: true }}>
+    <ConfigProvider namespace={namespace()} button={{ autoInsertSpace: true }}>
+      <div>
+        <input
+          value={namespace()}
+          onInput={(e) => setNamespace(e.currentTarget.value)}
+        />
+      </div>
+
       <ConfigProvider size="small">
         <ElButtonGroup size={size()} type={type()}>
           <ElButton

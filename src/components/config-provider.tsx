@@ -5,12 +5,13 @@ import {
   ParentComponent,
   splitProps,
 } from 'solid-js'
-import { useGlobalConfig } from '../composables/use-global-config'
+import { useGlobalConfig } from '../composables'
 import { ComponentSize } from '../constants'
 
 export interface ConfigProviderProps {
   size?: ComponentSize
   button?: ButtonConfigContext
+  namespace?: string
 }
 
 export interface ButtonConfigContext {
