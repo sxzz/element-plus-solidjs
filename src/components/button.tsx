@@ -5,23 +5,15 @@ import { ButtonGroupContext } from './button-group'
 import type { ComponentSize } from '../constants'
 import type { Component, ComponentProps } from 'solid-js'
 
-export const buttonTypes = [
-  'default',
-  'primary',
-  'success',
-  'warning',
-  'info',
-  'danger',
-  /**
-   * @deprecated
-   * Text type will be deprecated in the next major version (3.0.0)
-   */
-  'text',
-  '',
-] as const
-export type ButtonType = typeof buttonTypes[number]
-
-export const buttonNativeTypes = ['button', 'submit', 'reset'] as const
+export type ButtonType =
+  | ''
+  | 'text'
+  | 'default'
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'danger'
 
 export type ButtonProps = {
   size?: ComponentSize

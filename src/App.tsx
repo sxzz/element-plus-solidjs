@@ -1,6 +1,5 @@
 import { Index, createSignal } from 'solid-js'
-import { ConfigProvider, ElButtonGroup } from './components'
-import { ElButton, buttonTypes } from './components/button'
+import { ConfigProvider, ElButton, ElButtonGroup, ElCard } from './components'
 import { componentSizes } from './constants'
 import type { ButtonType } from './components/button'
 import type { ComponentSize } from './constants'
@@ -26,122 +25,143 @@ const App: Component = () => {
   }
 
   return (
-    <ConfigProvider namespace={namespace()} button={{ autoInsertSpace: true }}>
-      <div>
-        <input
-          value={namespace()}
-          onInput={(e) => setNamespace(e.currentTarget.value)}
-        />
-      </div>
-
-      <ConfigProvider size="small">
-        <ElButtonGroup size={size()} type={type()}>
-          <ElButton
-            ref={(el) => console.log(el)}
-            disabled={disabled()}
-            text={text()}
-            round={round()}
-            plain={plain()}
-            nativeType="button"
-            autoInsertSpace={insertSpace()}
-            onClick={handleClick}
-          >
-            {title()}
-          </ElButton>
-          <ElButton
-            disabled={disabled()}
-            text={text()}
-            round={round()}
-            plain={plain()}
-            nativeType="button"
-            autoInsertSpace={insertSpace()}
-            onClick={handleClick}
-          >
-            {title()}
-          </ElButton>
-        </ElButtonGroup>
+    <>
+      <ConfigProvider
+        namespace={namespace()}
+        button={{ autoInsertSpace: true }}
+      >
         <div>
-          Size:
-          <Index each={componentSizes}>
-            {(item) => (
-              <label>
-                <input
-                  type="radio"
-                  checked={size() === item()}
-                  onChange={() => setSize(item())}
-                />
-                {item()}
-              </label>
-            )}
-          </Index>
+          <input
+            value={namespace()}
+            onInput={(e) => setNamespace(e.currentTarget.value)}
+          />
         </div>
-        <div>
-          Type:
-          <Index each={buttonTypes}>
-            {(item) => (
-              <label>
-                <input
-                  type="radio"
-                  checked={type() === item()}
-                  onChange={() => setType(item())}
-                />
-                {item()}
-              </label>
-            )}
-          </Index>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={disabled()}
-              onChange={(e) => setDisabled(e.currentTarget.checked)}
-            />
-            disabled
-          </label>
 
-          <label>
-            <input
-              type="checkbox"
-              checked={text()}
-              onChange={(e) => setText(e.currentTarget.checked)}
-            />
-            text
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              checked={round()}
-              onChange={(e) => setRound(e.currentTarget.checked)}
-            />
-            round
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              checked={plain()}
-              onChange={(e) => setPlain(e.currentTarget.checked)}
-            />
-            plain
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              checked={insertSpace()}
-              onChange={(e) =>
-                setInsertSpace(e.currentTarget.checked ? true : undefined)
+        <ConfigProvider size="small">
+          <ElButtonGroup size={size()} type={type()}>
+            <ElButton
+              ref={(el) => console.log(el)}
+              disabled={disabled()}
+              text={text()}
+              round={round()}
+              plain={plain()}
+              nativeType="button"
+              autoInsertSpace={insertSpace()}
+              onClick={handleClick}
+            >
+              {title()}
+            </ElButton>
+            <ElButton
+              disabled={disabled()}
+              text={text()}
+              round={round()}
+              plain={plain()}
+              nativeType="button"
+              autoInsertSpace={insertSpace()}
+              onClick={handleClick}
+            >
+              {title()}
+            </ElButton>
+          </ElButtonGroup>
+          <div>
+            Size:
+            <Index each={componentSizes}>
+              {(item) => (
+                <label>
+                  <input
+                    type="radio"
+                    checked={size() === item()}
+                    onChange={() => setSize(item())}
+                  />
+                  {item()}
+                </label>
+              )}
+            </Index>
+          </div>
+          <div>
+            Type:
+            <Index
+              each={
+                [
+                  '',
+                  'text',
+                  'default',
+                  'primary',
+                  'success',
+                  'warning',
+                  'info',
+                  'danger',
+                ] as const
               }
-            />
-            autoInsertSpace
-          </label>
-        </div>
-        <hr />
-        Powered by <a href="https://www.solidjs.com/">SolidJS</a>.
+            >
+              {(item) => (
+                <label>
+                  <input
+                    type="radio"
+                    checked={type() === item()}
+                    onChange={() => setType(item())}
+                  />
+                  {item()}
+                </label>
+              )}
+            </Index>
+          </div>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={disabled()}
+                onChange={(e) => setDisabled(e.currentTarget.checked)}
+              />
+              disabled
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={text()}
+                onChange={(e) => setText(e.currentTarget.checked)}
+              />
+              text
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={round()}
+                onChange={(e) => setRound(e.currentTarget.checked)}
+              />
+              round
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={plain()}
+                onChange={(e) => setPlain(e.currentTarget.checked)}
+              />
+              plain
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={insertSpace()}
+                onChange={(e) =>
+                  setInsertSpace(e.currentTarget.checked ? true : undefined)
+                }
+              />
+              autoInsertSpace
+            </label>
+          </div>
+        </ConfigProvider>
       </ConfigProvider>
-    </ConfigProvider>
+      <hr />
+      <ElCard header="This is title.">Hello Card.</ElCard>
+      <ElCard header={<b>Title</b>}>Hello Card.</ElCard>
+      <hr />
+      Powered by <a href="https://www.solidjs.com/">SolidJS</a>.
+    </>
   )
 }
 

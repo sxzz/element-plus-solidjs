@@ -3,9 +3,8 @@
 declare module 'glob:components:./*' {
   export const ButtonGroupContext: GlobExport.ExportsComponents0['ButtonGroupContext']
   export const ElButtonGroup: GlobExport.ExportsComponents0['ElButtonGroup']
-  export const buttonTypes: GlobExport.ExportsComponents0['buttonTypes']
-  export const buttonNativeTypes: GlobExport.ExportsComponents0['buttonNativeTypes']
   export const ElButton: GlobExport.ExportsComponents0['ElButton']
+  export const ElCard: GlobExport.ExportsComponents0['ElCard']
   export const ConfigContext: GlobExport.ExportsComponents0['ConfigContext']
   export const ConfigProvider: GlobExport.ExportsComponents0['ConfigProvider']
 }
