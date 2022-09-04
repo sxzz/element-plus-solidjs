@@ -1,5 +1,5 @@
 import { createMemo } from 'solid-js'
-import { createNamespace } from '../utils/namespace'
+import { createNamespace } from '../utils'
 import { useGlobalConfig } from './use-global-config'
 
 export const defaultNamespace = 'el'
@@ -9,5 +9,5 @@ export const useNamespace = (block: string) => {
   const namespace = createMemo(
     () => globalConfig?.().namespace || defaultNamespace
   )
-  return createNamespace(namespace, block)
+  return createMemo(() => createNamespace(namespace(), block))
 }

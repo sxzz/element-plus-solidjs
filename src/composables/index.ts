@@ -1,3 +1,1 @@
-export * from './use-global-config'
-export * from './use-namespace'
-export * from './use-size'
+export * from 'glob:composables:./*'

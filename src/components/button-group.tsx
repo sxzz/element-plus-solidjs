@@ -4,7 +4,7 @@ import type { Component, ComponentProps } from 'solid-js'
 import type { ComponentSize } from '../constants'
 import type { ButtonType } from './button'
 
-export type ButtonGroupProps = {
+export interface ButtonGroupProps {
   size?: ComponentSize
   type?: ButtonType
 }
@@ -18,7 +18,7 @@ export const ElButtonGroup: Component<
   const ns = useNamespace('button')
   return (
     <ButtonGroupContext.Provider value={selfProps}>
-      <div class={ns.b('group')} {...restProps} />
+      <div class={ns().b('group')} {...restProps} />
     </ButtonGroupContext.Provider>
   )
 }

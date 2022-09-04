@@ -1,5 +1,3 @@
-import type { Accessor } from 'solid-js'
-
 const statePrefix = 'is-'
 
 const _bem = (
@@ -22,25 +20,25 @@ const _bem = (
   return cls
 }
 
-export const createNamespace = (namespace: Accessor<string>, block: string) => {
-  const b = (blockSuffix = '') => _bem(namespace(), block, blockSuffix, '', '')
+export const createNamespace = (namespace: string, block: string) => {
+  const b = (blockSuffix = '') => _bem(namespace, block, blockSuffix, '', '')
   const e = (element?: string) =>
-    element ? _bem(namespace(), block, '', element, '') : ''
+    element ? _bem(namespace, block, '', element, '') : ''
   const m = (modifier?: string) =>
-    modifier ? _bem(namespace(), block, '', '', modifier) : ''
+    modifier ? _bem(namespace, block, '', '', modifier) : ''
   const be = (blockSuffix?: string, element?: string) =>
     blockSuffix && element
-      ? _bem(namespace(), block, blockSuffix, element, '')
+      ? _bem(namespace, block, blockSuffix, element, '')
       : ''
   const em = (element?: string, modifier?: string) =>
-    element && modifier ? _bem(namespace(), block, '', element, modifier) : ''
+    element && modifier ? _bem(namespace, block, '', element, modifier) : ''
   const bm = (blockSuffix?: string, modifier?: string) =>
     blockSuffix && modifier
-      ? _bem(namespace(), block, blockSuffix, '', modifier)
+      ? _bem(namespace, block, blockSuffix, '', modifier)
       : ''
   const bem = (blockSuffix?: string, element?: string, modifier?: string) =>
     blockSuffix && element && modifier
-      ? _bem(namespace(), block, blockSuffix, element, modifier)
+      ? _bem(namespace, block, blockSuffix, element, modifier)
       : ''
   const is: {
     (name: string, state: boolean | undefined): string
@@ -55,7 +53,7 @@ export const createNamespace = (namespace: Accessor<string>, block: string) => {
   const cssVar = (object: Record<string, string>) => {
     const styles: Record<string, string> = {}
     for (const key of Object.keys(object)) {
-      styles[`--${namespace()}-${key}`] = object[key]
+      styles[`--${namespace}-${key}`] = object[key]
     }
     return styles
   }
@@ -63,13 +61,13 @@ export const createNamespace = (namespace: Accessor<string>, block: string) => {
   const cssVarBlock = (object: Record<string, string>) => {
     const styles: Record<string, string> = {}
     for (const key of Object.keys(object)) {
-      styles[`--${namespace()}-${block}-${key}`] = object[key]
+      styles[`--${namespace}-${block}-${key}`] = object[key]
     }
     return styles
   }
 
-  const cssVarName = (name: string) => `--${namespace()}-${name}`
-  const cssVarBlockName = (name: string) => `--${namespace()}-${block}-${name}`
+  const cssVarName = (name: string) => `--${namespace}-${name}`
+  const cssVarBlockName = (name: string) => `--${namespace}-${block}-${name}`
 
   return {
     namespace,

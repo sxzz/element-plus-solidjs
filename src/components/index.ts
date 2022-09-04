@@ -1,3 +1,1 @@
-export * from './button'
-export * from './button-group'
-export * from './config-provider'
+export * from 'glob:components:./*'

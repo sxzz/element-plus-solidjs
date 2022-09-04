@@ -69,17 +69,17 @@ export const ElButton: Component<
 
   const classList = createMemo(() => {
     return classnames([
-      ns.b(),
-      ns.m(type()),
-      ns.m(size()),
-      ns.is('disabled', props.disabled),
-      ns.is('loading', props.loading),
-      ns.is('plain', props.plain),
-      ns.is('round', props.round),
-      ns.is('circle', props.circle),
-      ns.is('text', props.text),
-      ns.is('link', props.link),
-      ns.is('has-bg', props.bg),
+      ns().b(),
+      ns().m(type()),
+      ns().m(size()),
+      ns().is('disabled', props.disabled),
+      ns().is('loading', props.loading),
+      ns().is('plain', props.plain),
+      ns().is('round', props.round),
+      ns().is('circle', props.circle),
+      ns().is('text', props.text),
+      ns().is('link', props.link),
+      ns().is('has-bg', props.bg),
     ])
   })
 
@@ -97,7 +97,7 @@ export const ElButton: Component<
       aria-disabled={props.disabled || props.loading}
       disabled={props.disabled || props.loading}
     >
-      <span classList={{ [ns.em('text', 'expand')]: shouldAddSpace() }}>
+      <span classList={{ [ns().em('text', 'expand')]: shouldAddSpace() }}>
         {props.children}
       </span>
     </button>

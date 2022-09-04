@@ -1,1 +1,1 @@
-export * from './namespace'
+export * from 'glob:utils:./*'
