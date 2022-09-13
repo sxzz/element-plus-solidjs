@@ -7,6 +7,9 @@ declare module 'glob:components:./*' {
   export const ElCard: GlobExport.ExportsComponents0['ElCard']
   export const ConfigContext: GlobExport.ExportsComponents0['ConfigContext']
   export const ConfigProvider: GlobExport.ExportsComponents0['ConfigProvider']
+  export const ElRadioGroup: GlobExport.ExportsComponents0['ElRadioGroup']
+  export const RadioGroupContext: GlobExport.ExportsComponents0['RadioGroupContext']
+  export const ElRadio: GlobExport.ExportsComponents0['ElRadio']
 }
 declare module 'glob:composables:./*' {
   export const useGlobalConfig: GlobExport.ExportsComposables1['useGlobalConfig']
