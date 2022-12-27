@@ -10,7 +10,12 @@ export const RadioGroupContext = createContext<RadioGroupProps>()
 export const ElRadioGroup: Component<
   RadioGroupProps & ComponentProps<'div'>
 > = (props) => {
-  const [selfProps, restProps] = splitProps(props, ['size', 'setValue', 'value', 'onChange'])
+  const [selfProps, restProps] = splitProps(props, [
+    'size',
+    'setValue',
+    'value',
+    'onChange',
+  ])
   const ns = useNamespace('radio')
   return (
     <RadioGroupContext.Provider value={selfProps}>

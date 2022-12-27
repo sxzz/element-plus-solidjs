@@ -5,7 +5,7 @@ import { RadioGroupContext } from './radio-group'
 import type { ComponentSize } from '../constants'
 import type { Component, ComponentProps, Setter } from 'solid-js'
 
-export type RadioProps = {
+export interface RadioProps {
   label: string | number | boolean
   setValue?: Setter<string | number | boolean>
   value?: string | number | boolean
@@ -13,10 +13,10 @@ export type RadioProps = {
   size?: ComponentSize
   disabled?: boolean
   bordered?: boolean
-  onChange?: (e:Event) => void
+  onChange?: (e: Event) => void
 }
 
-const ElRadio: Component<
+export const ElRadio: Component<
   RadioProps & Omit<ComponentProps<'input'>, 'radio'>
 > = (props) => {
   const [, restProps] = splitProps(props, [
@@ -60,9 +60,8 @@ const ElRadio: Component<
   const handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement
     if (target.checked) {
-      props.setValue?.(props.label) || radioGroupContext?.setValue?.(props.label)
-      console.log(props.label)
-      console.log(props?.value || radioGroupContext?.value)
+      props.setValue?.(props.label) ||
+        radioGroupContext?.setValue?.(props.label)
       props.onChange?.(e)
     }
   }
@@ -82,5 +81,3 @@ const ElRadio: Component<
     </label>
   )
 }
-
-export { ElRadio }
