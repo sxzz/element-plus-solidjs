@@ -1,5 +1,12 @@
 import { Index, createSignal } from 'solid-js'
-import { ConfigProvider, ElButton, ElButtonGroup, ElCard } from './components'
+import {
+  ConfigProvider,
+  ElButton,
+  ElButtonGroup,
+  ElCard,
+  ElRadio,
+  ElRadioGroup,
+} from './components'
 import { componentSizes } from './constants'
 import type { ButtonType } from './components/button'
 import type { ComponentSize } from './constants'
@@ -24,8 +31,13 @@ const App: Component = () => {
     setTimeout(() => setTitle('按钮'), 2000)
   }
 
+  const handleChange = () => {
+    console.log('change')
+  }
+
   return (
     <>
+      <input type="radio" checked={false} onChange={() => console.log(1)} />
       <ConfigProvider
         namespace={namespace()}
         button={{ autoInsertSpace: true }}
@@ -65,46 +77,32 @@ const App: Component = () => {
           </ElButtonGroup>
           <div>
             Size:
-            <Index each={componentSizes}>
-              {(item) => (
-                <label>
-                  <input
-                    type="radio"
-                    checked={size() === item()}
-                    onChange={() => setSize(item())}
-                  />
-                  {item()}
-                </label>
-              )}
-            </Index>
+            <ElRadioGroup value={size()} setValue={setSize}>
+              <Index each={componentSizes}>
+                {(item) => <ElRadio label={item()} />}
+              </Index>
+            </ElRadioGroup>
           </div>
           <div>
             Type:
-            <Index
-              each={
-                [
-                  '',
-                  'text',
-                  'default',
-                  'primary',
-                  'success',
-                  'warning',
-                  'info',
-                  'danger',
-                ] as const
-              }
-            >
-              {(item) => (
-                <label>
-                  <input
-                    type="radio"
-                    checked={type() === item()}
-                    onChange={() => setType(item())}
-                  />
-                  {item()}
-                </label>
-              )}
-            </Index>
+            <ElRadioGroup value={size()} setValue={setSize} size={'small'}>
+              <Index
+                each={
+                  [
+                    '',
+                    'text',
+                    'default',
+                    'primary',
+                    'success',
+                    'warning',
+                    'info',
+                    'danger',
+                  ] as const
+                }
+              >
+                {(item) => <ElRadio label={item()} />}
+              </Index>
+            </ElRadioGroup>
           </div>
           <div>
             <label>
