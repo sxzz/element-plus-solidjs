@@ -9,18 +9,18 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@element-plus/theme-chalk": "^2.2.6",
-    "classnames": "^2.3.1",
-    "solid-js": "^1.5.4"
+    "@element-plus/theme-chalk": "^2.2.16",
+    "classnames": "^2.3.2",
+    "solid-js": "^1.6.6"
   },
   "devDependencies": {
-    "@sxzz/eslint-config-prettier": "^2.4.2",
-    "@sxzz/eslint-config-ts": "^2.4.2",
-    "eslint": "^8.23.0",
-    "typescript": "^4.8.2",
-    "unplugin-glob": "^0.1.1",
-    "vite": "^3.0.9",
-    "vite-plugin-inspect": "^0.6.1",
-    "vite-plugin-solid": "^2.3.0"
+    "@sxzz/eslint-config-prettier": "^2.4.4",
+    "@sxzz/eslint-config-ts": "^2.4.4",
+    "eslint": "^8.30.0",
+    "typescript": "^4.9.4",
+    "unplugin-glob": "^0.2.1",
+    "vite": "^4.0.3",
+    "vite-plugin-inspect": "^0.7.11",
+    "vite-plugin-solid": "^2.5.0"
   }
 }
